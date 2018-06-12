@@ -9,7 +9,7 @@ import android.arch.persistence.room.PrimaryKey
  */
 
 @Entity(tableName = "geo_names")
-class GeoName(
+data class GeoName(
         @PrimaryKey val id: Int,
         val name: String,
         @Ignore val asciiName: String,
@@ -27,5 +27,34 @@ class GeoName(
         val population: Int,
         val elevation: Int,
         val dem: Int,
-        val timeZone: String
-)
+        val timeZone: String,
+        @Ignore val modDate: String
+) {
+    companion object {
+
+        fun fromString(string: String): GeoName {
+            val cols = string.split('\t')
+            return GeoName(
+                    id = cols[0].toInt(),
+                    name = cols[1],
+                    asciiName = cols[2],
+                    altNames = cols[4],
+                    latitude = cols[5].toFloat(),
+                    longitude = cols[6].toFloat(),
+                    featureClass = cols[7],
+                    featureCode = cols[8],
+                    countryCode = cols[9],
+                    altCC = cols[10],
+                    admin1Code = cols[11],
+                    admin2Code = cols[12],
+                    admin3Code = cols[13],
+                    admin4Code = cols[14],
+                    population = cols[15].toInt(),
+                    elevation = cols[16].toInt(),
+                    dem = cols[17].toInt(),
+                    timeZone = cols[18],
+                    modDate = cols[19]
+                    )
+        }
+    }
+}
