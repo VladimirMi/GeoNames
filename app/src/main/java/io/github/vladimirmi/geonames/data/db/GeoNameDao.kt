@@ -12,6 +12,6 @@ import android.arch.persistence.room.OnConflictStrategy
 interface GeoNameDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(vararg names: GeoName)
+    fun insert(geoName: GeoName)
 
 }

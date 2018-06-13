@@ -17,5 +17,7 @@ class App : Application() {
             Stetho.initializeWithDefaults(applicationContext)
             Timber.plant(Timber.DebugTree())
         }
+
+        ServiceLocator.init(applicationContext)
     }
 }

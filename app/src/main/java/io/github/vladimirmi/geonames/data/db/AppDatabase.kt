@@ -13,10 +13,12 @@ import android.content.Context
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun geoNameDao(): GeoNameDao
-}
 
-fun getInstance(context: Context): AppDatabase {
-    return Room.databaseBuilder(context.applicationContext,
-            AppDatabase::class.java, "database")
-            .build()
+    companion object {
+        fun getInstance(context: Context): AppDatabase {
+            return Room.databaseBuilder(context.applicationContext,
+                    AppDatabase::class.java, "database")
+                    .build()
+        }
+    }
 }
