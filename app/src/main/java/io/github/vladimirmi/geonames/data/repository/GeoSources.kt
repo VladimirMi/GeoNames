@@ -8,7 +8,7 @@ import java.net.URL
 
 object GeoSources {
 
-    private const val BASE_URL = "http://download.geonames.org/export/dump"
+    private const val BASE_URL = "http://download.geonames.org/export/dump/"
 
     const val name = "cities1000.zip"
 

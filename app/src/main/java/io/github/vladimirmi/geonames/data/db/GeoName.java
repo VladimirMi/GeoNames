@@ -33,25 +33,35 @@ public class GeoName {
     public static GeoName fromString(String string) {
         String[] cols = string.split("\t");
         GeoName geoname = new GeoName();
-        geoname.id = Integer.parseInt(cols[0]);
+        geoname.id = toInt(cols[0]);
         geoname.name = cols[1];
         geoname.asciiName = cols[2];
-        geoname.altNames = cols[4];
-        geoname.latitude = Float.parseFloat(cols[5]);
-        geoname.longitude = Float.parseFloat(cols[6]);
-        geoname.featureClass = cols[7];
-        geoname.featureCode = cols[8];
-        geoname.countryCode = cols[9];
-        geoname.altCC = cols[10];
-        geoname.admin1Code = cols[11];
-        geoname.admin2Code = cols[12];
-        geoname.admin3Code = cols[13];
-        geoname.admin4Code = cols[14];
-        geoname.population = Integer.parseInt(cols[15]);
-        geoname.elevation = Integer.parseInt(cols[16]);
-        geoname.dem = Integer.parseInt(cols[17]);
-        geoname.timeZone = cols[18];
-        geoname.modDate = cols[19];
+        geoname.altNames = cols[3];
+        geoname.latitude = toFloat(cols[4]);
+        geoname.longitude = toFloat(cols[5]);
+        geoname.featureClass = cols[6];
+        geoname.featureCode = cols[7];
+        geoname.countryCode = cols[8];
+        geoname.altCC = cols[9];
+        geoname.admin1Code = cols[10];
+        geoname.admin2Code = cols[11];
+        geoname.admin3Code = cols[12];
+        geoname.admin4Code = cols[13];
+        geoname.population = toInt(cols[14]);
+        geoname.elevation = toInt(cols[15]);
+        geoname.dem = toInt(cols[16]);
+        geoname.timeZone = cols[17];
+        geoname.modDate = cols[18];
         return geoname;
+    }
+
+    private static int toInt(String s) {
+        if (s.isEmpty()) return 0;
+        return Integer.parseInt(s);
+    }
+
+    private static float toFloat(String s) {
+        if (s.isEmpty()) return 0f;
+        return Float.parseFloat(s);
     }
 }

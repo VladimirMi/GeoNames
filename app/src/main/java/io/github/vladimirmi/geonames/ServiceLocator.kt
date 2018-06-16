@@ -16,7 +16,9 @@ class ServiceLocator(private val appContext: Context) {
 
     val appDatabase by lazy { AppDatabase.getInstance(appContext) }
 
-    val geoSourcesRepository by lazy { GeoSourcesRepository(appDatabase.geoNameDao(), preferences) }
+    val geoSourcesRepository by lazy {
+        GeoSourcesRepository(appDatabase.geoNameDao(), preferences)
+    }
 
     companion object {
         @SuppressLint("StaticFieldLeak")
