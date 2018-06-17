@@ -23,31 +23,42 @@ android {
 }
 
 ext {
-    SUPPORT_LIBRARY_VERSION = "27.1.1"
-    ROOM_VERSION = "1.1.0"
+    support_library_version = "27.1.1"
+    aac_version = "1.1.1"
+    room_version = "1.1.0"
+    play_services_version = "15.0.1"
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation 'com.google.android.gms:play-services-maps:15.0.1'
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    testImplementation "junit:junit:4.12"
+    androidTestImplementation "com.android.support.test:runner:1.0.2"
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:3.0.2"
 
     //Support
-    implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation 'com.android.support:design:27.1.1'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+    implementation "com.android.support:appcompat-v7:$support_library_version"
+    implementation "com.android.support:design:$support_library_version"
+    implementation "com.android.support.constraint:constraint-layout:1.1.2"
 
     //Net
     implementation "com.squareup.okhttp3:okhttp:3.9.1"
 
+    //AAC
+    implementation "android.arch.lifecycle:viewmodel:$aac_version"
+    kapt "android.arch.lifecycle:compiler:$aac_version"
+
     //Persistence
-    implementation "android.arch.persistence.room:runtime:$ROOM_VERSION"
-    kapt "android.arch.persistence.room:compiler:$ROOM_VERSION"
+    implementation "android.arch.persistence.room:runtime:$room_version"
+    kapt "android.arch.persistence.room:compiler:$room_version"
 
     //Logging
     implementation "com.facebook.stetho:stetho:1.5.0"
     implementation "com.jakewharton.timber:timber:4.7.0"
 
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    //Maps
+    implementation "com.google.android.gms:play-services-maps:$play_services_version"
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
