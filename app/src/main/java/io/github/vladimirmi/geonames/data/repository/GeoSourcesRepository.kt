@@ -1,12 +1,10 @@
 package io.github.vladimirmi.geonames.data.repository
 
-import android.content.Context
 import io.github.vladimirmi.geonames.data.db.GeoName
 import io.github.vladimirmi.geonames.data.db.GeoNameDao
 import io.github.vladimirmi.geonames.data.preference.Preferences
 import okhttp3.*
 import timber.log.Timber
-import java.io.File
 import java.io.IOException
 import java.util.zip.ZipInputStream
 
@@ -37,9 +35,10 @@ class GeoSourcesRepository(private val geoNameDao: GeoNameDao,
             override fun onResponse(call: Call, response: Response) {
 
                 val body: ResponseBody = response.body()!!
+                val start = System.currentTimeMillis()
 
                 ZipInputStream(body.byteStream()).use { zis ->
-
+                    zis.nextEntry
                     var geonames = ArrayList<GeoName>(1000)
                     zis.reader().forEachLine {
                         if (geonames.size == 1000) {
@@ -50,6 +49,8 @@ class GeoSourcesRepository(private val geoNameDao: GeoNameDao,
                     }
                     if (geonames.isNotEmpty()) geoNameDao.insert(geonames)
                 }
+
+                Timber.e("onResponse: ${(System.currentTimeMillis() - start) / 1000} seconds")
 
                 body.close()
                 preferences.downloadedSources += sourceName

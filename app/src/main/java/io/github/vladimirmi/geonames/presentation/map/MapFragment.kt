@@ -11,7 +11,9 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import io.github.vladimirmi.geonames.R
+import io.github.vladimirmi.geonames.ServiceLocator
 import kotlinx.android.synthetic.main.fragment_map.*
+import timber.log.Timber
 
 /**
  * Created by Vladimir Mikhalev 17.06.2018.
@@ -21,10 +23,11 @@ private const val MAP_BUNDLE_KEY = "MapBundleKey"
 
 class MapFragment : Fragment(), OnMapReadyCallback {
 
+    val database = ServiceLocator.instance.appDatabase
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_map, container, false)
-        return view
+        return inflater.inflate(R.layout.fragment_map, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -73,9 +76,21 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     }
 
     override fun onMapReady(map: GoogleMap) {
-        // Add a marker in Sydney and move the camera
+        map.setMinZoomPreference(10f)
+        map.setMaxZoomPreference(15f)
         val sydney = LatLng(-34.0, 151.0)
-        map.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
         map.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+
+        map.setOnCameraIdleListener {
+            val bounds = map.projection.visibleRegion.latLngBounds
+            val names = database.geoNameDao().findAll(bounds.northeast.latitude, bounds.southwest.latitude,
+                    bounds.northeast.longitude, bounds.southwest.longitude)
+            Timber.e("onMapReady: ${names.size}")
+            map.clear()
+            names.forEach {
+                val position = LatLng(it.latitude.toDouble(), it.longitude.toDouble())
+                map.addMarker(MarkerOptions().position(position).title(it.name))
+            }
+        }
     }
 }

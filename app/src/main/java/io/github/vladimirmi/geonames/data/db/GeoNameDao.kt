@@ -17,4 +17,7 @@ interface GeoNameDao {
 
     @Query("SELECT * FROM geo_names")
     fun findAll() :List<GeoName>
+
+    @Query("SELECT * FROM geo_names WHERE latitude < :north AND latitude > :south AND longitude < :east AND longitude > :west")
+    fun findAll(north: Double, south: Double, east: Double, west: Double): List<GeoName>
 }
