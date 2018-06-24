@@ -14,7 +14,12 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         val geoSourcesRepository = ServiceLocator.instance.geoSourcesRepository
-        pager.adapter = PagerAdapter(supportFragmentManager)
+        pager.adapter = PagerAdapter(this, supportFragmentManager)
         tabs.setupWithViewPager(pager)
+    }
+
+    override fun onDestroy() {
+        pager.adapter = null
+        super.onDestroy()
     }
 }

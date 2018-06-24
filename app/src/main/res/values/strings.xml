@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">GeoNames</string>
-    <string name="manual">Manual</string>
-    <string name="map">Map</string>
+
+    <string-array name="tabs">
+        <item>Manual</item>
+        <item>Map</item>
+    </string-array>
 </resources>
