@@ -1,10 +1,12 @@
 package io.github.vladimirmi.geonames.data.repository
 
+import android.content.Context
 import io.github.vladimirmi.geonames.data.db.GeoName
 import io.github.vladimirmi.geonames.data.db.GeoNameDao
 import io.github.vladimirmi.geonames.data.preference.Preferences
 import okhttp3.*
 import timber.log.Timber
+import java.io.File
 import java.io.IOException
 import java.util.zip.ZipInputStream
 
@@ -14,11 +16,18 @@ import java.util.zip.ZipInputStream
 
 
 class GeoSourcesRepository(private val geoNameDao: GeoNameDao,
-                           private val preferences: Preferences) {
+                           private val preferences: Preferences,
+                           private val context: Context) {
 
     init {
         if (!preferences.downloadedSources.contains(GeoSources.name)) {
             loadDb(GeoSources.name)
+
+            val file = File(context.filesDir, "tiles")
+            //todo download from net
+            context.assets.open("countries-raster.mbtiles").use { inS ->
+                file.outputStream().use { inS.copyTo(it) }
+            }
         }
     }
 

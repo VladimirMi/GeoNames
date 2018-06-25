@@ -17,7 +17,7 @@ class ServiceLocator(private val appContext: Context) {
     val appDatabase by lazy { AppDatabase.getInstance(appContext) }
 
     val geoSourcesRepository by lazy {
-        GeoSourcesRepository(appDatabase.geoNameDao(), preferences)
+        GeoSourcesRepository(appDatabase.geoNameDao(), preferences, appContext)
     }
 
     companion object {
@@ -26,7 +26,7 @@ class ServiceLocator(private val appContext: Context) {
             private set
 
         fun init(appContext: Context) {
-            instance = ServiceLocator(appContext);
+            instance = ServiceLocator(appContext)
         }
     }
 }

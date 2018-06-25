@@ -12,8 +12,10 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import io.github.vladimirmi.geonames.R
 import io.github.vladimirmi.geonames.ServiceLocator
+import io.github.vladimirmi.geonames.data.repository.MBTilesProvider
 import kotlinx.android.synthetic.main.fragment_map.*
 import timber.log.Timber
+import java.io.File
 
 /**
  * Created by Vladimir Mikhalev 17.06.2018.
@@ -24,6 +26,8 @@ private const val MAP_BUNDLE_KEY = "MapBundleKey"
 class MapFragment : Fragment(), OnMapReadyCallback {
 
     val database = ServiceLocator.instance.appDatabase
+
+    val tileProvider by lazy { MBTilesProvider(File(context?.filesDir, "tiles")) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -78,8 +82,9 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     override fun onMapReady(map: GoogleMap) {
         map.setMinZoomPreference(10f)
         map.setMaxZoomPreference(15f)
-        val sydney = LatLng(-34.0, 151.0)
+        val sydney = LatLng(51.28, 37.54)
         map.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+
 
         map.setOnCameraIdleListener {
             val bounds = map.projection.visibleRegion.latLngBounds
