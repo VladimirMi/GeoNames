@@ -1,4 +1,4 @@
-package io.github.vladimirmi.geonames.presentation.map
+package io.github.vladimirmi.geonames.presentation.mapexport
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -13,7 +13,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import io.github.vladimirmi.geonames.R
 import io.github.vladimirmi.geonames.ServiceLocator
 import io.github.vladimirmi.geonames.data.repository.MBTilesProvider
-import kotlinx.android.synthetic.main.fragment_map.*
+import kotlinx.android.synthetic.main.fragment_map_export.*
 import java.io.File
 
 /**
@@ -30,7 +30,7 @@ class MapExportFragment : Fragment(), OnMapReadyCallback {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_map, container, false)
+        return inflater.inflate(R.layout.fragment_map_export, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

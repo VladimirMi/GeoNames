@@ -5,8 +5,8 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
 import io.github.vladimirmi.geonames.R
-import io.github.vladimirmi.geonames.presentation.manual.ManualExportFragment
-import io.github.vladimirmi.geonames.presentation.map.MapExportFragment
+import io.github.vladimirmi.geonames.presentation.manualexport.ManualExportFragment
+import io.github.vladimirmi.geonames.presentation.mapexport.MapExportFragment
 
 /**
  * Created by Vladimir Mikhalev 17.06.2018.

@@ -1,4 +1,4 @@
-package io.github.vladimirmi.geonames.presentation.manual
+package io.github.vladimirmi.geonames.presentation.manualexport
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -11,6 +11,6 @@ class ManualExportFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_manual_input, container, false)
+        return inflater.inflate(R.layout.fragment_manual_export, container, false)
     }
 }

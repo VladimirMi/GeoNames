@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">GeoNames</string>
     <string name="export">Export</string>
+    <string name="parameters">parameters</string>
+    <string name="process">process</string>
 
     <string-array name="tabs">
         <item>Manual</item>
