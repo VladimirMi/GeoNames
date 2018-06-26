@@ -14,7 +14,6 @@ import io.github.vladimirmi.geonames.R
 import io.github.vladimirmi.geonames.ServiceLocator
 import io.github.vladimirmi.geonames.data.repository.MBTilesProvider
 import kotlinx.android.synthetic.main.fragment_map.*
-import timber.log.Timber
 import java.io.File
 
 /**
@@ -23,7 +22,7 @@ import java.io.File
 
 private const val MAP_BUNDLE_KEY = "MapBundleKey"
 
-class MapFragment : Fragment(), OnMapReadyCallback {
+class MapExportFragment : Fragment(), OnMapReadyCallback {
 
     val database = ServiceLocator.instance.appDatabase
 
@@ -90,7 +89,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
             val bounds = map.projection.visibleRegion.latLngBounds
             val names = database.geoNameDao().findAll(bounds.northeast.latitude, bounds.southwest.latitude,
                     bounds.northeast.longitude, bounds.southwest.longitude)
-            Timber.e("onMapReady: ${names.size}")
+
             map.clear()
             names.forEach {
                 val position = LatLng(it.latitude.toDouble(), it.longitude.toDouble())

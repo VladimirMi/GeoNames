@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import io.github.vladimirmi.geonames.R
 
-class ManualInputFragment : Fragment() {
+class ManualExportFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
